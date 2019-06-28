@@ -1,0 +1,20 @@
+module registerX(data, clk, Tx, outX);
+	input wire [3:0] data;
+	input wire clk;
+	input wire [3:0] Tx;
+	output reg [3:0] outX;
+
+	parameter
+	HOLD = 3'b000,
+	LOAD = 3'b001,
+	SHIFTR = 3'b010,
+	SHIFTL = 3'b011,
+	CLEAR = 3'b100;
+	
+	always @ (negedge clk) begin
+		case (Tx)
+			LOAD: outX <= data;            // Carrega o valor
+			CLEAR: outX <= 4'b0000;     // Zera o valor
+		endcase
+	end
+endmodule
